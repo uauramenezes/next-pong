@@ -1,11 +1,13 @@
 import Head from 'next/head';
-import { useEffect } from 'react';
-import Pong from '../scripts/Pong';
+import Pong from '../game/Pong';
 
 export default function Home() {
-  useEffect(() => {
+  function startGame() {
+    const btn = document.getElementById('btn') as HTMLButtonElement;
+    btn.hidden = true;
     Pong()
-  }, [])
+  }
+  
   return (
     <main id='main'>
       <Head>
@@ -13,7 +15,8 @@ export default function Home() {
         <meta name="description" content="A simple Pong game built with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <canvas id="canvas" width='700' height='400'></canvas>
+      <button id="btn" onClick={() => startGame()}>Start</button>
+      <canvas id="canvas" width='800' height='500' hidden={true}></canvas>
     </main>
   )
 }
