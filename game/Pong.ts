@@ -1,40 +1,46 @@
+import Ball from "./Ball";
 import Player from "./Player";
 
 export default function Pong() {
   const canvas = document.getElementById('canvas') as HTMLCanvasElement;
-  const ctx = canvas.getContext('2d') as CanvasRenderingContext2D;
+  const canvasContext = canvas.getContext('2d') as CanvasRenderingContext2D;
 
   canvas.hidden = false;
 
-  let player1 = new Player(1, canvas.width, canvas.height)
-  let player2 = new Player(2, canvas.width, canvas.height)
+  let leftPlayer = new Player(1, canvas.width, canvas.height);
+  let rightPlayer = new Player(2, canvas.width, canvas.height);
+  let ball = new Ball(canvas.width, canvas.height);
 
   document.addEventListener('keydown', (e) => {
-    player1.keyDown(e, 'w', 's');
-    player2.keyDown(e, 'ArrowUp', 'ArrowDown');
+    leftPlayer.keyDown(e, 'w', 's');
+    rightPlayer.keyDown(e, 'ArrowUp', 'ArrowDown');
   });
 
   document.addEventListener('keyup', (e) => {
-    player1.keyUp(e, 'w', 's');
-    player2.keyUp(e, 'ArrowUp', 'ArrowDown');
+    leftPlayer.keyUp(e, 'w', 's');
+    rightPlayer.keyUp(e, 'ArrowUp', 'ArrowDown');
   });
 
   let start = new Date().getTime();
 
   function render() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    canvasContext.clearRect(0, 0, canvas.width, canvas.height);
 
-    let deltaTime = new Date().getTime() - start;
+    let deltaTime = (new Date().getTime() - start) / 1000;
 
-    player1.draw(ctx, 'white');
-    player1.move(deltaTime);
+    leftPlayer.draw(canvasContext, 'white');
+    leftPlayer.move(deltaTime);
     
-    player2.draw(ctx, 'white');
-    player2.move(deltaTime);
+    rightPlayer.draw(canvasContext, 'white');
+    rightPlayer.move(deltaTime);
 
-    start = new Date().getTime()
+    ball.draw(canvasContext, 'white');
+    ball.move(deltaTime);
+
+    start = new Date().getTime();
     requestAnimationFrame(render);
   }
+
 
   requestAnimationFrame(render);
 }
