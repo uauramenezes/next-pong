@@ -12,13 +12,13 @@ export default function Pong() {
   let ball = new Ball(canvas.width, canvas.height);
 
   document.addEventListener('keydown', (e) => {
-    leftPlayer.keyDown(e, 'w', 's');
-    rightPlayer.keyDown(e, 'ArrowUp', 'ArrowDown');
+    leftPlayer.keyDown(e.key, 'w', 's');
+    rightPlayer.keyDown(e.key, 'ArrowUp', 'ArrowDown');
   });
 
   document.addEventListener('keyup', (e) => {
-    leftPlayer.keyUp(e, 'w', 's');
-    rightPlayer.keyUp(e, 'ArrowUp', 'ArrowDown');
+    leftPlayer.keyUp(e.key, 'w', 's');
+    rightPlayer.keyUp(e.key, 'ArrowUp', 'ArrowDown');
   });
 
   let start = new Date().getTime();
@@ -36,11 +36,12 @@ export default function Pong() {
 
     ball.draw(canvasContext, 'white');
     ball.move(deltaTime);
+    ball.playerCollision(1, leftPlayer.x, leftPlayer.y, leftPlayer.width, leftPlayer.height)
+    ball.playerCollision(2, rightPlayer.x, rightPlayer.y, rightPlayer.width, rightPlayer.height)
 
     start = new Date().getTime();
     requestAnimationFrame(render);
   }
-
 
   requestAnimationFrame(render);
 }
