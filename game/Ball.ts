@@ -1,7 +1,9 @@
+import IPlayer from './IPlayer';
+
 export default class Ball {
 	#canvasHeight: number;
 	#canvasWidth: number;
-	#xDirection = -1;
+	#xDirection = 1;
 	#yDirection = 1;
 	#speed = 200;
 	#radius = 8;
@@ -16,14 +18,14 @@ export default class Ball {
 	}
 
 	#getRandomDirection = () => {
-		let random = Math.floor(Math.random() * 2 + 1)
-		return random == 1 ? 1 : -1
+		let random = Math.floor(Math.random() * 2 + 1);
+		return random == 1 ? 1 : -1;
 	}
 
 	move(deltaTime: number) {
 		this.#x += this.#speed * deltaTime * this.#xDirection;
 		this.#y += this.#speed * deltaTime * this.#yDirection;
-		this.wallCollision()
+		this.wallCollision();
 	}
 
 	wallCollision() {
@@ -37,17 +39,49 @@ export default class Ball {
 		}
 	}
 
-	playerCollision(player: number, x: number, y: number, w: number, h: number) {
-		let bool = player == 1 ? 
-								(this.#x <= x + w && this.#y >= y && this.#y <= y + h) : 
-								(this.#y >= y && this.#y <= y + h && this.#x >= x)
-		if (bool) this.#xDirection *= -1
+	leftPlayerCollision(player: IPlayer) {
+		if (
+			((this.#y - this.#radius <= player.y + player.height &&
+			this.#y >= player.y + player.height) || 
+			(this.#y + this.#radius >= player.y &&
+			this.#y <= player.y)) && 
+			this.#x < player.x + player.width && this.#xDirection === -1
+		) {
+				this.#yDirection *= -1;
+			}
+		else if (
+			this.#y > player.y && this.#y < player.y + player.height &&
+			this.#x - this.#radius < player.x + player.width &&
+			this.#x > player.x + player.width &&
+			this.#xDirection === -1
+		) {
+				this.#xDirection *= -1;
+		}
+	}
+
+	rightPlayerCollision(player: IPlayer) {
+		if (
+			((this.#y - this.#radius <= player.y + player.height &&
+			this.#y >= player.y + player.height) || 
+			(this.#y + this.#radius >= player.y &&
+			this.#y <= player.y)) && 
+			this.#x + this.#radius > player.x && this.#xDirection === 1
+		) {
+			this.#yDirection *= -1;
+		}
+		else if (
+			this.#y > player.y && this.#y < player.y + player.height &&
+			this.#x + this.#radius > player.x && this.#x < player.x &&
+			this.#xDirection === 1
+		) {
+			this.#xDirection *= -1;
+		}
 	}
 
 	draw(canvasContext: CanvasRenderingContext2D, color: string) {
 		canvasContext.fillStyle = color;
 		canvasContext.beginPath();
-		canvasContext.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI)
+		canvasContext.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI);
 		canvasContext.fill();
 	}
 }

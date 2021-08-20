@@ -36,8 +36,8 @@ export default function Pong() {
 
     ball.draw(canvasContext, 'white');
     ball.move(deltaTime);
-    ball.playerCollision(1, leftPlayer.x, leftPlayer.y, leftPlayer.width, leftPlayer.height)
-    ball.playerCollision(2, rightPlayer.x, rightPlayer.y, rightPlayer.width, rightPlayer.height)
+    ball.leftPlayerCollision(leftPlayer.get())
+    ball.rightPlayerCollision(rightPlayer.get())
 
     start = new Date().getTime();
     requestAnimationFrame(render);
