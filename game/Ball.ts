@@ -5,7 +5,7 @@ export default class Ball {
 	#canvasWidth: number;
 	#xDirection = 1;
 	#yDirection = 1;
-	#speed = 200;
+	#speed = 250;
 	#radius = 8;
 	#x: number;
 	#y: number;
@@ -13,8 +13,8 @@ export default class Ball {
 	constructor(canvasWidth: number, canvasHeight: number) {
 		this.#canvasWidth = canvasWidth;
 		this.#canvasHeight = canvasHeight;
-		this.#x = canvasWidth / 2 - this.#radius;
-		this.#y = canvasHeight / 2 - this.#radius;
+		this.#x = canvasWidth / 2;
+		this.#y = canvasHeight / 2;
 	}
 
 	#getRandomDirection = () => {
@@ -22,21 +22,31 @@ export default class Ball {
 		return random == 1 ? 1 : -1;
 	}
 
-	move(deltaTime: number) {
-		this.#x += this.#speed * deltaTime * this.#xDirection;
-		this.#y += this.#speed * deltaTime * this.#yDirection;
-		this.wallCollision();
-	}
-
-	wallCollision() {
+	#wallCollision = (): string => {
 		if (this.#y <= 0 || this.#y >= this.#canvasHeight) 
 			this.#yDirection *= -1
-		if (this.#x <= 0 || this.#x >= this.#canvasWidth){
-			this.#y = this.#canvasHeight / 2 - this.#radius;
-			this.#x = this.#canvasWidth / 2 - this.#radius;
-			this.#yDirection = this.#getRandomDirection();
-			this.#xDirection *= -1;
+		if (this.#x <= 0) {
+			this.#reset();
+			return 'left';
 		}
+		if (this.#x >= this.#canvasWidth) {
+			this.#reset();
+			return 'right';
+		}
+		return 'None';
+	}
+
+	#reset = () => {
+		this.#y = this.#canvasHeight / 2;
+		this.#x = this.#canvasWidth / 2;
+		this.#yDirection = this.#getRandomDirection();
+		this.#xDirection *= -1;
+	}
+
+	move(deltaTime: number): string {
+		this.#x += this.#speed * deltaTime * this.#xDirection;
+		this.#y += this.#speed * deltaTime * this.#yDirection;
+		return this.#wallCollision();
 	}
 
 	leftPlayerCollision(player: IPlayer) {
@@ -78,8 +88,8 @@ export default class Ball {
 		}
 	}
 
-	draw(canvasContext: CanvasRenderingContext2D, color: string) {
-		canvasContext.fillStyle = color;
+	draw(canvasContext: CanvasRenderingContext2D) {
+		canvasContext.fillStyle = 'white';
 		canvasContext.beginPath();
 		canvasContext.arc(this.#x, this.#y, this.#radius, 0, 2 * Math.PI);
 		canvasContext.fill();

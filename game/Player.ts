@@ -11,12 +11,12 @@ export default class Player {
 	#up = false;
 	#down = false;
 
-	constructor(player: number, canvasWidth: number, canvasHeight: number) {
+	constructor(player: string, canvasWidth: number, canvasHeight: number) {
 		this.#canvasWidth = canvasWidth;
 		this.#canvasHeight = canvasHeight;
 		this.#width = Math.floor(this.#canvasWidth / 75);
 		this.#height = Math.floor(this.#canvasHeight / 5);
-		this.#x = player == 1 ? 11 : this.#canvasWidth - this.#width - 11;
+		this.#x = player == 'left' ? 11 : this.#canvasWidth - this.#width - 11;
 		this.#y = Math.floor(this.#canvasHeight / 2 - (this.#canvasHeight / 10) / 2);
 	}
 
@@ -65,7 +65,7 @@ export default class Player {
       x: this.#x,
       y: this.#y,
       width: this.#width,
-      height: this.#height
+      height: this.#height,
     }
   }
 }

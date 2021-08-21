@@ -9,9 +9,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #555555;
 }
 
 canvas{
   background-color: #000000;
-  border: 2px solid #ffffff;
+  border: 6px solid #ffffff;
 }
