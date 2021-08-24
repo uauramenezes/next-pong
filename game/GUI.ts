@@ -14,7 +14,7 @@ export class GUI {
 	}
 
 	#drawNet = (canvasContext: CanvasRenderingContext2D) => {
-		let width = 6;
+		let width = 5;
 		let x = this.#canvasWidth / 2 - width / 2;
 		canvasContext.fillRect(x, 0, width, this.#canvasHeight);
 

@@ -14,7 +14,7 @@ export default class Player {
 	constructor(player: string, canvasWidth: number, canvasHeight: number) {
 		this.#canvasWidth = canvasWidth;
 		this.#canvasHeight = canvasHeight;
-		this.#width = Math.floor(this.#canvasWidth / 75);
+		this.#width = Math.floor(this.#canvasWidth / 100);
 		this.#height = Math.floor(this.#canvasHeight / 5);
 		this.#x = player == 'left' ? 11 : this.#canvasWidth - this.#width - 11;
 		this.#y = Math.floor(this.#canvasHeight / 2 - (this.#canvasHeight / 10) / 2);
