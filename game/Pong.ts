@@ -24,6 +24,7 @@ export default function Pong() {
   });
 
   let start = new Date().getTime();
+  let play = true;
 
   function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -40,7 +41,11 @@ export default function Pong() {
     ball.leftPlayerCollision(leftPlayer.get());
     ball.rightPlayerCollision(rightPlayer.get());
 
-    gui.raiseScore(ball.move(deltaTime))
+    if (play) {
+      let score = ball.move(deltaTime)
+      play = gui.raiseScore(score);
+    }
+    
     gui.draw(ctx);
 
     start = new Date().getTime();

@@ -24,6 +24,9 @@ export class GUI {
 		canvasContext.font = '35px serif';
 		canvasContext.fillText(`${this.#leftScore}`, this.#left, 50);
 		canvasContext.fillText(`${this.#rightScore}`, this.#right, 50);
+		if (this.#leftScore === 5 || this.#rightScore === 5) {
+			return 
+		}
 	}
 
 	draw(canvasContext: CanvasRenderingContext2D) {
@@ -33,13 +36,11 @@ export class GUI {
 	}
 
 	raiseScore(side: string) {
-		switch (side) {
-			case 'left': 
-				this.#rightScore++;
-				break;
-			case 'right': 
-				this.#leftScore++;
-				break;
+		if (side === 'left') this.#rightScore++;
+		if (side === 'right') this.#leftScore++;
+		if (this.#leftScore === 5 || this.#rightScore == 5) {
+			return false;
 		}
+		return true;
 	}
 }
