@@ -17,3 +17,24 @@ canvas{
   border: 6px solid #ffffff;
   border-radius: 25px;
 }
+
+.menu {
+  position: fixed;
+  z-index: 10;
+
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: #ffffff;
+  font-size: 35px;
+  text-align: center;
+}
+
+h3 {
+  margin: 35px 0;
+}
+
+ul {
+  list-style-type: none;
+}

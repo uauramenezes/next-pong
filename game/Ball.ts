@@ -55,7 +55,8 @@ export default class Ball {
 			this.#y >= player.y + player.height) || 
 			(this.#y + this.#radius >= player.y &&
 			this.#y <= player.y)) && 
-			this.#x < player.x + player.width && this.#xDirection === -1
+			this.#x < player.x + player.width &&
+			this.#xDirection === -1
 		) {
 				this.#yDirection *= -1;
 			}
