@@ -24,30 +24,45 @@ export default function Pong() {
   });
 
   let start = new Date().getTime();
-  let play = true;
+  let play = false;
+
+  let counter = 3;
+  let countDown = setInterval(() => {
+    counter--
+  }, 1000)
+  
 
   function render() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     let deltaTime = (new Date().getTime() - start) / 1000;
-
+    
     leftPlayer.draw(ctx, 'white');
     leftPlayer.move(deltaTime);
     
     rightPlayer.draw(ctx, 'white');
     rightPlayer.move(deltaTime);
 
-    ball.draw(ctx);
     ball.leftPlayerCollision(leftPlayer.get());
     ball.rightPlayerCollision(rightPlayer.get());
+
+    if (counter > 0) {
+      gui.drawCountDown(ctx, counter)
+    } else {
+      clearInterval(countDown);
+      ball.draw(ctx);
+      gui.draw(ctx);
+
+      setTimeout(() => {
+        play = true;
+      }, 1000)
+    }
 
     if (play) {
       let score = ball.move(deltaTime)
       play = gui.raiseScore(score);
     }
     
-    gui.draw(ctx);
-
     start = new Date().getTime();
     requestAnimationFrame(render);
   }

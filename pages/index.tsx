@@ -1,14 +1,7 @@
 import Head from 'next/head';
-import Pong from '../game/Pong';
 import Menu from '../menu/Menu';
 
 export default function Home() {
-  function startGame() {
-    const btn = document.getElementById('btn') as HTMLButtonElement;
-    btn.hidden = true;
-    Pong()
-  }
-  
   return (
     <main id='main'>
       <Head>

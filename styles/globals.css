@@ -38,3 +38,14 @@ h3 {
 ul {
   list-style-type: none;
 }
+
+li {
+  margin: 25px;
+  padding: 0 15px;
+  border-color: #000000;
+  border-style: dashed solid;
+}
+
+li:hover {
+  border-color: #ffffff;
+}

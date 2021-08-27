@@ -13,11 +13,17 @@ export class GUI {
 		this.#right = canvasWidth * 3 / 4;
 	}
 
+	drawCountDown(canvasContext: CanvasRenderingContext2D, counter: number) {
+		canvasContext.textAlign = 'center';
+		canvasContext.fillStyle = 'white';
+		canvasContext.font = '35px serif';
+		canvasContext.fillText(`${counter}`, this.#canvasWidth / 2, this.#canvasHeight / 2);
+	}
+
 	#drawNet = (canvasContext: CanvasRenderingContext2D) => {
 		let width = 5;
 		let x = this.#canvasWidth / 2 - width / 2;
 		canvasContext.fillRect(x, 0, width, this.#canvasHeight);
-
 	}
 
 	#drawScore = (canvasContext: CanvasRenderingContext2D) => {
