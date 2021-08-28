@@ -23,8 +23,11 @@ export default class Ball {
 	}
 
 	#wallCollision = (): string => {
-		if (this.#y <= 0 || this.#y >= this.#canvasHeight) 
+		if ((this.#y <= 0 && this.#yDirection === -1)
+		|| (this.#y >= this.#canvasHeight
+		&& this.#yDirection === 1)) {
 			this.#yDirection *= -1
+		}
 		if (this.#x <= 0) {
 			this.#reset();
 			return 'left';
