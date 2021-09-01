@@ -7,45 +7,26 @@ body {
   width: 100vw;
   height: 100vh;
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   background-color: #555555;
 }
 
 canvas{
+  border-radius: 25px;
   background-color: #000000;
   border: 6px solid #ffffff;
-  border-radius: 25px;
 }
 
 .menu {
-  position: fixed;
   z-index: 10;
+  position: fixed;
+  
+  width: 800px;
+  height: 500px;
+  line-height: 500px;
 
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-
-  color: #ffffff;
   font-size: 35px;
+  color: #ffffff;
   text-align: center;
-}
-
-h3 {
-  margin: 35px 0;
-}
-
-ul {
-  list-style-type: none;
-}
-
-li {
-  margin: 25px;
-  padding: 0 15px;
-  border-color: #000000;
-  border-style: dashed solid;
-}
-
-li:hover {
-  border-color: #ffffff;
 }

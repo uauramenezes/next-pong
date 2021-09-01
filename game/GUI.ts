@@ -44,9 +44,14 @@ export class GUI {
 	raiseScore(side: string) {
 		if (side === 'left') this.#rightScore++;
 		if (side === 'right') this.#leftScore++;
-		if (this.#leftScore === 5 || this.#rightScore == 5) {
+		if (this.#leftScore >= 5 || this.#rightScore >= 5) {
 			return false;
 		}
 		return true;
+	}
+
+	resetScore() {
+		this.#leftScore = 0;
+		this.#rightScore = 0;
 	}
 }

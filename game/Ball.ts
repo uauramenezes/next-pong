@@ -36,7 +36,7 @@ export default class Ball {
 			this.#reset();
 			return 'right';
 		}
-		return 'None';
+		return 'none';
 	}
 
 	#reset = () => {

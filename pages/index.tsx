@@ -9,7 +9,7 @@ export default function Home() {
         <meta name="description" content="A simple Pong game built with Next.js" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <Menu />
+      <Menu text='Click here to Start'/>
       <canvas id="canvas" width='800' height='500'></canvas>
     </main>
   )

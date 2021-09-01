@@ -17,7 +17,7 @@ export default class Player {
 		this.#width = Math.floor(this.#canvasWidth / 100);
 		this.#height = Math.floor(this.#canvasHeight / 5);
 		this.#x = player == 'left' ? 11 : this.#canvasWidth - this.#width - 11;
-		this.#y = Math.floor(this.#canvasHeight / 2 - (this.#canvasHeight / 10) / 2);
+		this.#y = Math.floor(this.#canvasHeight / 2 - this.#height / 2);
 	}
 
   keyDown(key: string, upKey: string, downKey: string) {
